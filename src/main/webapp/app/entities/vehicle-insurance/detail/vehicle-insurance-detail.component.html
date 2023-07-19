@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="vehicleInsurance">
+      <h2 data-cy="vehicleInsuranceDetailsHeading">
+        <span jhiTranslate="connexApp.vehicleInsurance.detail.title">Vehicle Insurance</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.name">Name</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.age">Age</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.age }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.driving_experience">Driving Experience</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.driving_experience }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.driver_record">Driver Record</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.driver_record }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.claims">Claims</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.claims }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.car_value">Car Value</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.car_value }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.annual_mileage">Annual Mileage</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.annual_mileage }}</span>
+        </dd>
+        <dt><span jhiTranslate="connexApp.vehicleInsurance.insurance_history">Insurance History</span></dt>
+        <dd>
+          <span>{{ vehicleInsurance.insurance_history }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/vehicle-insurance', vehicleInsurance.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

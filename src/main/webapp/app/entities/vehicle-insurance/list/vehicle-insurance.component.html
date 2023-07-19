@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="VehicleInsuranceHeading">
+    <span jhiTranslate="connexApp.vehicleInsurance.home.title">Vehicle Insurances</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="connexApp.vehicleInsurance.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-vehicle-insurance"
+        [routerLink]="['/vehicle-insurance/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="connexApp.vehicleInsurance.home.createLabel"> Create a new Vehicle Insurance </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="vehicleInsurances?.length === 0">
+    <span jhiTranslate="connexApp.vehicleInsurance.home.notFound">No Vehicle Insurances found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="vehicleInsurances && vehicleInsurances.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="age">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.age">Age</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="driving_experience">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.driving_experience">Driving Experience</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="driver_record">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.driver_record">Driver Record</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="claims">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.claims">Claims</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="car_value">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.car_value">Car Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="annual_mileage">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.annual_mileage">Annual Mileage</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="insurance_history">
+            <div class="d-flex">
+              <span jhiTranslate="connexApp.vehicleInsurance.insurance_history">Insurance History</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicleInsurance of vehicleInsurances; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/vehicle-insurance', vehicleInsurance.id, 'view']">{{ vehicleInsurance.id }}</a>
+          </td>
+          <td>{{ vehicleInsurance.name }}</td>
+          <td>{{ vehicleInsurance.age }}</td>
+          <td>{{ vehicleInsurance.driving_experience }}</td>
+          <td>{{ vehicleInsurance.driver_record }}</td>
+          <td>{{ vehicleInsurance.claims }}</td>
+          <td>{{ vehicleInsurance.car_value }}</td>
+          <td>{{ vehicleInsurance.annual_mileage }}</td>
+          <td>{{ vehicleInsurance.insurance_history }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/vehicle-insurance', vehicleInsurance.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/vehicle-insurance', vehicleInsurance.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(vehicleInsurance)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

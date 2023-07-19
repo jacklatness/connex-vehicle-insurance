@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-vehicle-insurance-heading"
+        data-cy="VehicleInsuranceCreateUpdateHeading"
+        jhiTranslate="connexApp.vehicleInsurance.home.createOrEditLabel"
+      >
+        Create or edit a Vehicle Insurance
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.age" for="field_age">Age</label>
+          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
+          <div *ngIf="editForm.get('age')!.invalid && (editForm.get('age')!.dirty || editForm.get('age')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('age')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('age')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driving_experience" for="field_driving_experience"
+            >Driving Experience</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="driving_experience"
+            id="field_driving_experience"
+            data-cy="driving_experience"
+            formControlName="driving_experience"
+          />
+          <div
+            *ngIf="
+              editForm.get('driving_experience')!.invalid &&
+              (editForm.get('driving_experience')!.dirty || editForm.get('driving_experience')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('driving_experience')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('driving_experience')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driver_record" for="field_driver_record">Driver Record</label>
+          <input
+            type="number"
+            class="form-control"
+            name="driver_record"
+            id="field_driver_record"
+            data-cy="driver_record"
+            formControlName="driver_record"
+          />
+          <div
+            *ngIf="
+              editForm.get('driver_record')!.invalid && (editForm.get('driver_record')!.dirty || editForm.get('driver_record')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('driver_record')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('driver_record')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.claims" for="field_claims">Claims</label>
+          <input type="number" class="form-control" name="claims" id="field_claims" data-cy="claims" formControlName="claims" />
+          <div *ngIf="editForm.get('claims')!.invalid && (editForm.get('claims')!.dirty || editForm.get('claims')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('claims')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('claims')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_value" for="field_car_value">Car Value</label>
+          <input type="number" class="form-control" name="car_value" id="field_car_value" data-cy="car_value" formControlName="car_value" />
+          <div *ngIf="editForm.get('car_value')!.invalid && (editForm.get('car_value')!.dirty || editForm.get('car_value')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('car_value')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('car_value')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.annual_mileage" for="field_annual_mileage"
+            >Annual Mileage</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="annual_mileage"
+            id="field_annual_mileage"
+            data-cy="annual_mileage"
+            formControlName="annual_mileage"
+          />
+          <div
+            *ngIf="
+              editForm.get('annual_mileage')!.invalid && (editForm.get('annual_mileage')!.dirty || editForm.get('annual_mileage')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('annual_mileage')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('annual_mileage')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.insurance_history" for="field_insurance_history"
+            >Insurance History</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="insurance_history"
+            id="field_insurance_history"
+            data-cy="insurance_history"
+            formControlName="insurance_history"
+          />
+          <div
+            *ngIf="
+              editForm.get('insurance_history')!.invalid &&
+              (editForm.get('insurance_history')!.dirty || editForm.get('insurance_history')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('insurance_history')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('insurance_history')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
