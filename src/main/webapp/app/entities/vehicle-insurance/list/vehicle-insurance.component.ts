@@ -7,7 +7,7 @@ import SharedModule from 'app/shared/shared.module';
 import { SortDirective, SortByDirective } from 'app/shared/sort';
 import { DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe } from 'app/shared/date';
 import { FormsModule } from '@angular/forms';
-import { IVehicleInsurance } from '../vehicle-insurance.model';
+import { CarModel, IVehicleInsurance } from '../vehicle-insurance.model';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, VehicleInsuranceService } from '../service/vehicle-insurance.service';
 import { VehicleInsuranceDeleteDialogComponent } from '../delete/vehicle-insurance-delete-dialog.component';
@@ -30,6 +30,7 @@ import { SortService } from 'app/shared/sort/sort.service';
 })
 export class VehicleInsuranceComponent implements OnInit {
   vehicleInsurances?: IVehicleInsurance[];
+  carModelList: CarModel[] = [];
   isLoading = false;
 
   predicate = 'id';
@@ -63,6 +64,12 @@ export class VehicleInsuranceComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+  }
+
+  getCarModelList() {
+    this.vehicleInsuranceService.getCarModelList().subscribe((response: any) => {
+      this.carModelList = response.data.car_Model_Lists.results;
+    });
   }
 
   load(): void {

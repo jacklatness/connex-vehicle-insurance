@@ -2,7 +2,7 @@
   <div class="col-8">
     <div *ngIf="vehicleInsurance">
       <h2 data-cy="vehicleInsuranceDetailsHeading">
-        <span jhiTranslate="connexApp.vehicleInsurance.detail.title">Vehicle Insurance</span>
+        <span jhiTranslate="connexApp.vehicleInsurance.detail.title">Vehicle Insurance Details</span>
       </h2>
 
       <hr />
@@ -49,6 +49,35 @@
           <span>{{ vehicleInsurance.insurance_history }}</span>
         </dd>
       </dl>
+
+      <h2 data-cy="vehicleInsuranceDetailsHeading">
+        <span jhiTranslate="connexApp.vehicleInsurance.detail.title">Insurance Premium Quotation</span>
+      </h2>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Reference ID</span></dt>
+        <dd>
+          <span>Q{{ randNumber }}{{ vehicleInsurance.id }}</span>
+        </dd>
+        <dt><span>Sum of Factors</span></dt>
+        <dd>
+          <span>{{ factor }}</span>
+        </dd>
+        <dt><span>Base Premium Rate</span></dt>
+        <dd>
+          <span>{{ basePremium | currency : 'CAD' }}</span>
+        </dd>
+        <dt><span>Yearly Premium Rate</span></dt>
+        <dd>
+          <span>{{ basePremium * factor | currency : 'CAD' }}</span>
+        </dd>
+        <dt><span>Monthyl Premium Rate</span></dt>
+        <dd>
+          <span>{{ (basePremium * factor) / 12 | currency : 'CAD' }}</span>
+        </dd>
+      </dl>
+
+      <hr />
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>

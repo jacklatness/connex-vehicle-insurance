@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IVehicleInsurance, NewVehicleInsurance } from '../vehicle-insurance.model';
+import { BasePremium, CarModel, IVehicleInsurance, NewVehicleInsurance } from '../vehicle-insurance.model';
+import { VehicleInsuranceConfigService } from 'app/core/config/vehicle-insurance-config.service';
 
 export type PartialUpdateVehicleInsurance = Partial<IVehicleInsurance> & Pick<IVehicleInsurance, 'id'>;
 
@@ -15,8 +16,21 @@ export type EntityArrayResponseType = HttpResponse<IVehicleInsurance[]>;
 @Injectable({ providedIn: 'root' })
 export class VehicleInsuranceService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/vehicle-insurances');
+  protected connexApiBaseUrl = this.vehicleInsuranceConfigService.getConnexApiBaseUrl();
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected vehicleInsuranceConfigService: VehicleInsuranceConfigService
+  ) {}
+
+  getVehicleInsuranceBasePremium() {
+    return this.http.get<BasePremium>(`${this.connexApiBaseUrl}/base_premium.json`);
+  }
+
+  getCarModelList() {
+    return this.http.get(`${this.connexApiBaseUrl}/car_model.json`);
+  }
 
   create(vehicleInsurance: NewVehicleInsurance): Observable<EntityResponseType> {
     return this.http.post<IVehicleInsurance>(this.resourceUrl, vehicleInsurance, { observe: 'response' });
@@ -36,6 +50,10 @@ export class VehicleInsuranceService {
       vehicleInsurance,
       { observe: 'response' }
     );
+  }
+
+  calculate(id: number): Observable<EntityResponseType> {
+    return this.http.get<IVehicleInsurance>(`${this.resourceUrl}/calculate/${id}`, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {

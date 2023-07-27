@@ -10,4 +10,15 @@ export interface IVehicleInsurance {
   insurance_history?: number | null;
 }
 
+export interface BasePremium {
+  base_premium: number;
+}
+
+export interface CarModel {
+  category: string;
+  make: string;
+  model: string;
+  year: number;
+}
+
 export type NewVehicleInsurance = Omit<IVehicleInsurance, 'id'> & { id: null };
