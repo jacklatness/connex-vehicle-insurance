@@ -1,6 +1,7 @@
 package com.connex.insuranceapp.service;
 
 import com.connex.insuranceapp.domain.VehicleInsurance;
+import java.lang.Double;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,13 @@ import java.util.Optional;
  * Service Interface for managing {@link VehicleInsurance}.
  */
 public interface VehicleInsuranceService {
+    /**
+     * Calculate a vehicleInsurance.
+     *
+     * @param vehicleInsurance the entity to calculate.
+     * @return the calculated Integer factor.
+     */
+    Double calculate(VehicleInsurance vehicleInsurance);
     /**
      * Save a vehicleInsurance.
      *

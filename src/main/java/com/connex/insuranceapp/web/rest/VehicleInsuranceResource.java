@@ -161,6 +161,19 @@ public class VehicleInsuranceResource {
     }
 
     /**
+     * {@code GET  /vehicle-insurances/calculate/:id} : get the "id" vehicleInsurance.
+     *
+     * @param id the id of the vehicleInsurance to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the vehicleInsurance, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/vehicle-insurances/calculate/{id}")
+    public Double calculateVehicleInsurance(@PathVariable Long id) {
+        log.debug("REST request to get VehicleInsurance : {}", id);
+        Optional<VehicleInsurance> vehicleInsurance = vehicleInsuranceService.findOne(id);
+        return vehicleInsuranceService.calculate(vehicleInsurance.get());
+    }
+
+    /**
      * {@code DELETE  /vehicle-insurances/:id} : delete the "id" vehicleInsurance.
      *
      * @param id the id of the vehicleInsurance to delete.
