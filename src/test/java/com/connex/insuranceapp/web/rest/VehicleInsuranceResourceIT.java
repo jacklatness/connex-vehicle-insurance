@@ -11,6 +11,8 @@ import com.connex.insuranceapp.domain.VehicleInsurance;
 import com.connex.insuranceapp.repository.VehicleInsuranceRepository;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,6 +36,9 @@ class VehicleInsuranceResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final LocalDate DEFAULT_BIRTHDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_BIRTHDATE = LocalDate.now(ZoneId.systemDefault());
+
     private static final Integer DEFAULT_AGE = 1;
     private static final Integer UPDATED_AGE = 2;
 
@@ -45,6 +50,18 @@ class VehicleInsuranceResourceIT {
 
     private static final Integer DEFAULT_CLAIMS = 1;
     private static final Integer UPDATED_CLAIMS = 2;
+
+    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MAKE = "AAAAAAAAAA";
+    private static final String UPDATED_MAKE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MODEL = "AAAAAAAAAA";
+    private static final String UPDATED_MODEL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_YEAR = 2004;
+    private static final String UPDATED_YEAR = 2005;
 
     private static final BigDecimal DEFAULT_CAR_VALUE = new BigDecimal(1);
     private static final BigDecimal UPDATED_CAR_VALUE = new BigDecimal(2);
@@ -81,10 +98,15 @@ class VehicleInsuranceResourceIT {
     public static VehicleInsurance createEntity(EntityManager em) {
         VehicleInsurance vehicleInsurance = new VehicleInsurance()
             .name(DEFAULT_NAME)
+            .birthdate(DEFAULT_BIRTHDATE)
             .age(DEFAULT_AGE)
             .driving_experience(DEFAULT_DRIVING_EXPERIENCE)
             .driver_record(DEFAULT_DRIVER_RECORD)
             .claims(DEFAULT_CLAIMS)
+            .category(DEFAULT_CATEGORY)
+            .make(DEFAULT_MAKE)
+            .model(DEFAULT_MODEL)
+            .year(DEFAULT_YEAR)
             .car_value(DEFAULT_CAR_VALUE)
             .annual_mileage(DEFAULT_ANNUAL_MILEAGE)
             .insurance_history(DEFAULT_INSURANCE_HISTORY);
@@ -100,10 +122,15 @@ class VehicleInsuranceResourceIT {
     public static VehicleInsurance createUpdatedEntity(EntityManager em) {
         VehicleInsurance vehicleInsurance = new VehicleInsurance()
             .name(UPDATED_NAME)
+            .birthdate(UPDATED_BIRTHDATE)
             .age(UPDATED_AGE)
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
+            .category(UPDATED_CATEGORY)
+            .make(UPDATED_MAKE)
+            .model(UPDATED_MODEL)
+            .year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -131,10 +158,15 @@ class VehicleInsuranceResourceIT {
         assertThat(vehicleInsuranceList).hasSize(databaseSizeBeforeCreate + 1);
         VehicleInsurance testVehicleInsurance = vehicleInsuranceList.get(vehicleInsuranceList.size() - 1);
         assertThat(testVehicleInsurance.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testVehicleInsurance.getBirthdate()).isEqualTo(DEFAULT_BIRTHDATE);
         assertThat(testVehicleInsurance.getAge()).isEqualTo(DEFAULT_AGE);
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(DEFAULT_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(DEFAULT_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(DEFAULT_CLAIMS);
+        assertThat(testVehicleInsurance.getCategory()).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(testVehicleInsurance.getMake()).isEqualTo(DEFAULT_MAKE);
+        assertThat(testVehicleInsurance.getModel()).isEqualTo(DEFAULT_MODEL);
+        assertThat(testVehicleInsurance.getYear()).isEqualTo(DEFAULT_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(DEFAULT_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(DEFAULT_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(DEFAULT_INSURANCE_HISTORY);
@@ -166,6 +198,25 @@ class VehicleInsuranceResourceIT {
         int databaseSizeBeforeTest = vehicleInsuranceRepository.findAll().size();
         // set the field null
         vehicleInsurance.setName(null);
+
+        // Create the VehicleInsurance, which fails.
+
+        restVehicleInsuranceMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(vehicleInsurance))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<VehicleInsurance> vehicleInsuranceList = vehicleInsuranceRepository.findAll();
+        assertThat(vehicleInsuranceList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkBirthdateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = vehicleInsuranceRepository.findAll().size();
+        // set the field null
+        vehicleInsurance.setBirthdate(null);
 
         // Create the VehicleInsurance, which fails.
 
@@ -325,10 +376,15 @@ class VehicleInsuranceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vehicleInsurance.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].birthdate").value(hasItem(DEFAULT_BIRTHDATE.toString())))
             .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
             .andExpect(jsonPath("$.[*].driving_experience").value(hasItem(DEFAULT_DRIVING_EXPERIENCE)))
             .andExpect(jsonPath("$.[*].driver_record").value(hasItem(DEFAULT_DRIVER_RECORD)))
             .andExpect(jsonPath("$.[*].claims").value(hasItem(DEFAULT_CLAIMS)))
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY)))
+            .andExpect(jsonPath("$.[*].make").value(hasItem(DEFAULT_MAKE)))
+            .andExpect(jsonPath("$.[*].model").value(hasItem(DEFAULT_MODEL)))
+            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
             .andExpect(jsonPath("$.[*].car_value").value(hasItem(sameNumber(DEFAULT_CAR_VALUE))))
             .andExpect(jsonPath("$.[*].annual_mileage").value(hasItem(sameNumber(DEFAULT_ANNUAL_MILEAGE))))
             .andExpect(jsonPath("$.[*].insurance_history").value(hasItem(DEFAULT_INSURANCE_HISTORY)));
@@ -347,10 +403,15 @@ class VehicleInsuranceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(vehicleInsurance.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.birthdate").value(DEFAULT_BIRTHDATE.toString()))
             .andExpect(jsonPath("$.age").value(DEFAULT_AGE))
             .andExpect(jsonPath("$.driving_experience").value(DEFAULT_DRIVING_EXPERIENCE))
             .andExpect(jsonPath("$.driver_record").value(DEFAULT_DRIVER_RECORD))
             .andExpect(jsonPath("$.claims").value(DEFAULT_CLAIMS))
+            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY))
+            .andExpect(jsonPath("$.make").value(DEFAULT_MAKE))
+            .andExpect(jsonPath("$.model").value(DEFAULT_MODEL))
+            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.car_value").value(sameNumber(DEFAULT_CAR_VALUE)))
             .andExpect(jsonPath("$.annual_mileage").value(sameNumber(DEFAULT_ANNUAL_MILEAGE)))
             .andExpect(jsonPath("$.insurance_history").value(DEFAULT_INSURANCE_HISTORY));
@@ -377,10 +438,15 @@ class VehicleInsuranceResourceIT {
         em.detach(updatedVehicleInsurance);
         updatedVehicleInsurance
             .name(UPDATED_NAME)
+            .birthdate(UPDATED_BIRTHDATE)
             .age(UPDATED_AGE)
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
+            .category(UPDATED_CATEGORY)
+            .make(UPDATED_MAKE)
+            .model(UPDATED_MODEL)
+            .year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -398,10 +464,15 @@ class VehicleInsuranceResourceIT {
         assertThat(vehicleInsuranceList).hasSize(databaseSizeBeforeUpdate);
         VehicleInsurance testVehicleInsurance = vehicleInsuranceList.get(vehicleInsuranceList.size() - 1);
         assertThat(testVehicleInsurance.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testVehicleInsurance.getBirthdate()).isEqualTo(UPDATED_BIRTHDATE);
         assertThat(testVehicleInsurance.getAge()).isEqualTo(UPDATED_AGE);
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(UPDATED_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(UPDATED_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
+        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getMake()).isEqualTo(UPDATED_MAKE);
+        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(UPDATED_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(UPDATED_INSURANCE_HISTORY);
@@ -477,7 +548,14 @@ class VehicleInsuranceResourceIT {
         VehicleInsurance partialUpdatedVehicleInsurance = new VehicleInsurance();
         partialUpdatedVehicleInsurance.setId(vehicleInsurance.getId());
 
-        partialUpdatedVehicleInsurance.age(UPDATED_AGE).driver_record(UPDATED_DRIVER_RECORD).claims(UPDATED_CLAIMS);
+        partialUpdatedVehicleInsurance
+            .birthdate(UPDATED_BIRTHDATE)
+            .age(UPDATED_AGE)
+            .claims(UPDATED_CLAIMS)
+            .category(UPDATED_CATEGORY)
+            .model(UPDATED_MODEL)
+            .year(UPDATED_YEAR)
+            .car_value(UPDATED_CAR_VALUE);
 
         restVehicleInsuranceMockMvc
             .perform(
@@ -492,11 +570,16 @@ class VehicleInsuranceResourceIT {
         assertThat(vehicleInsuranceList).hasSize(databaseSizeBeforeUpdate);
         VehicleInsurance testVehicleInsurance = vehicleInsuranceList.get(vehicleInsuranceList.size() - 1);
         assertThat(testVehicleInsurance.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testVehicleInsurance.getBirthdate()).isEqualTo(UPDATED_BIRTHDATE);
         assertThat(testVehicleInsurance.getAge()).isEqualTo(UPDATED_AGE);
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(DEFAULT_DRIVING_EXPERIENCE);
-        assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(UPDATED_DRIVER_RECORD);
+        assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(DEFAULT_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
-        assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(DEFAULT_CAR_VALUE);
+        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getMake()).isEqualTo(DEFAULT_MAKE);
+        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(DEFAULT_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(DEFAULT_INSURANCE_HISTORY);
     }
@@ -515,10 +598,15 @@ class VehicleInsuranceResourceIT {
 
         partialUpdatedVehicleInsurance
             .name(UPDATED_NAME)
+            .birthdate(UPDATED_BIRTHDATE)
             .age(UPDATED_AGE)
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
+            .category(UPDATED_CATEGORY)
+            .make(UPDATED_MAKE)
+            .model(UPDATED_MODEL)
+            .year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -536,10 +624,15 @@ class VehicleInsuranceResourceIT {
         assertThat(vehicleInsuranceList).hasSize(databaseSizeBeforeUpdate);
         VehicleInsurance testVehicleInsurance = vehicleInsuranceList.get(vehicleInsuranceList.size() - 1);
         assertThat(testVehicleInsurance.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testVehicleInsurance.getBirthdate()).isEqualTo(UPDATED_BIRTHDATE);
         assertThat(testVehicleInsurance.getAge()).isEqualTo(UPDATED_AGE);
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(UPDATED_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(UPDATED_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
+        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getMake()).isEqualTo(UPDATED_MAKE);
+        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(UPDATED_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(UPDATED_INSURANCE_HISTORY);

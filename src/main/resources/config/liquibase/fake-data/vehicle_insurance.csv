@@ -1,11 +1,11 @@
-id;name;age;driving_experience;driver_record;claims;car_value;annual_mileage;insurance_history
-1;bus off;23444;15294;125;10876;24318;16379;20579
-2;indigo until program;29616;28776;22609;5556;27880;887;14188
-3;aboard synthesize Palladium;12878;21708;25062;21848;7702;20120;24013
-4;Plastic Sleek;3611;29033;16384;7012;27730;2905;30665
-5;Assistant;2485;24066;21985;25088;22239;26538;8571
-6;brief Assistant;26512;6383;17907;10117;10246;8171;14706
-7;integrated;11160;28157;4247;17665;19433;24234;3267
-8;1080p glow Decentralized;7731;13908;29582;129;25485;17013;29656
-9;Falls port architecture;24713;29719;671;17849;5844;23112;11424
-10;Connecticut;9375;15620;20045;16822;5657;9535;26390
+id;name;birthdate;age;driving_experience;driver_record;claims;category;make;model;year;car_value;annual_mileage;insurance_history
+1;bus off;2023-07-18;15294;125;10876;24318;Factors indigo;male Refined sadly;Cargo;31020;31773;681;17932
+2;Palladium Account Communications;2023-07-19;26880;12609;16747;15966;bandwidth;overriding Van Car;Bicycle Computer Porsche;6383;17907;10117;10246
+3;deposit;2023-07-19;8518;9094;25290;11160;Medhurst Architect 1080p;flexibility white Uzbekistan;circuit Liaison Networked;7575;30219;17325;8760
+4;Southeast although;2023-07-19;5844;23112;11424;757;Connecticut;bluetooth;Home Hybrid;2780;23007;12829;3778
+5;Bicycle Congolese;2023-07-19;21873;6740;23941;4844;deposit;Toys;Grocery Tennessee;19762;13217;23113;24588
+6;North;2023-07-18;12460;28806;2668;25606;Jewelery;quantifying Northwest lever;portals deposit Ameliorated;28637;24896;22738;12415
+7;Directives World Diesel;2023-07-19;21905;2326;2002;11461;Murray South;Dollar silver yearly;lavender Small;29473;20445;22292;21863
+8;Car excepting vaguely;2023-07-19;22397;1916;10930;21626;female;blockchains;Radon Southwest matrix;13264;11019;30455;3670
+9;ROI Electric;2023-07-19;25998;5180;20338;11622;Small;Southwest entire Pound;Crew;29744;1441;27317;13412
+10;Paradigm;2023-07-18;21075;31671;13674;10659;Bike Yemeni Cloned;Norwegian Other;female Response;14197;26097;25554;21235

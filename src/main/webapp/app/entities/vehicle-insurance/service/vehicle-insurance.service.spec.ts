@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
+import { DATE_FORMAT } from 'app/config/input.constants';
 import { IVehicleInsurance } from '../vehicle-insurance.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../vehicle-insurance.test-samples';
 
-import { VehicleInsuranceService } from './vehicle-insurance.service';
+import { VehicleInsuranceService, RestVehicleInsurance } from './vehicle-insurance.service';
 
-const requireRestSample: IVehicleInsurance = {
+const requireRestSample: RestVehicleInsurance = {
   ...sampleWithRequiredData,
+  birthdate: sampleWithRequiredData.birthdate?.format(DATE_FORMAT),
 };
 
 describe('VehicleInsurance Service', () => {

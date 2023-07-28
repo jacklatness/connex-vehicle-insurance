@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,6 +29,10 @@ public class VehicleInsurance implements Serializable {
     private String name;
 
     @NotNull
+    @Column(name = "birthdate", nullable = false)
+    private LocalDate birthdate;
+
+    @NotNull
     @Column(name = "age", nullable = false)
     private Integer age;
 
@@ -42,6 +47,18 @@ public class VehicleInsurance implements Serializable {
     @NotNull
     @Column(name = "claims", nullable = false)
     private Integer claims;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "make")
+    private String make;
+
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "year")
+    private Integer year;
 
     @NotNull
     @Column(name = "car_value", precision = 21, scale = 2, nullable = false)
@@ -81,6 +98,19 @@ public class VehicleInsurance implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDate getBirthdate() {
+        return this.birthdate;
+    }
+
+    public VehicleInsurance birthdate(LocalDate birthdate) {
+        this.setBirthdate(birthdate);
+        return this;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
     }
 
     public Integer getAge() {
@@ -133,6 +163,58 @@ public class VehicleInsurance implements Serializable {
 
     public void setClaims(Integer claims) {
         this.claims = claims;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public VehicleInsurance category(String category) {
+        this.setCategory(category);
+        return this;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getMake() {
+        return this.make;
+    }
+
+    public VehicleInsurance make(String make) {
+        this.setMake(make);
+        return this;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return this.model;
+    }
+
+    public VehicleInsurance model(String model) {
+        this.setModel(model);
+        return this;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getYear() {
+        return this.year;
+    }
+
+    public VehicleInsurance year(Integer year) {
+        this.setYear(year);
+        return this;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public BigDecimal getCar_value() {
@@ -199,10 +281,15 @@ public class VehicleInsurance implements Serializable {
         return "VehicleInsurance{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", birthdate='" + getBirthdate() + "'" +
             ", age=" + getAge() +
             ", driving_experience=" + getDriving_experience() +
             ", driver_record=" + getDriver_record() +
             ", claims=" + getClaims() +
+            ", category='" + getCategory() + "'" +
+            ", make='" + getMake() + "'" +
+            ", model='" + getModel() + "'" +
+            ", year=" + getYear() +
             ", car_value=" + getCar_value() +
             ", annual_mileage=" + getAnnual_mileage() +
             ", insurance_history=" + getInsurance_history() +

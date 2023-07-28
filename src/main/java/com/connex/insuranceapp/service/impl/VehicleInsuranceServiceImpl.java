@@ -50,15 +50,12 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
         log.debug("calculatMileageFactor : {}", mileageFactor);
         log.debug("calculatInsuranceHistoryFactor : {}", insuranceHistoryFactor);
 
-        Double sum1, sum2, sum3;
+        log.debug(
+            "Product of Factors : {}",
+            (ageFactor * drivingExpFactor * driverRecFactor * claimsFactor * carValueFactor * mileageFactor * insuranceHistoryFactor)
+        );
 
-        sum1 = Double.sum(ageFactor, drivingExpFactor);
-        sum2 = Double.sum(driverRecFactor, claimsFactor);
-        sum3 = Double.sum(carValueFactor, mileageFactor);
-
-        log.debug("sum : {}", sum1 + sum2 + sum3 + insuranceHistoryFactor);
-
-        return sum1 + sum2 + sum3 + insuranceHistoryFactor;
+        return (ageFactor * drivingExpFactor * driverRecFactor * claimsFactor * carValueFactor * mileageFactor * insuranceHistoryFactor);
     }
 
     private Double calculateAgeFactor(Integer age) {
@@ -71,7 +68,7 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
         } else if (age >= 40 && age < 70) {
             factor = 0.9;
         } else if (age >= 70) {
-            factor = 0.0;
+            factor = 1.0;
         }
 
         return factor;
@@ -103,7 +100,7 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
         } else if (driverRecord.equals(2) || driverRecord.equals(3)) {
             factor = 1.3;
         } else if (driverRecord > 3) {
-            factor = 0.0;
+            factor = 1.0;
         }
 
         return factor;
@@ -119,7 +116,7 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
         } else if (claims.equals(2) || claims.equals(3)) {
             factor = 1.5;
         } else if (claims > 3) {
-            factor = 0.0;
+            factor = 1.0;
         }
 
         return factor;
@@ -146,7 +143,7 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
         } else if (carValue.compareTo(v150) >= 0 && carValue.compareTo(v200) < 0) {
             factor = 2.0;
         } else if (carValue.compareTo(v200) >= 0) {
-            factor = 0.0;
+            factor = 1.0;
         }
 
         return factor;
@@ -178,7 +175,7 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
 
         if (insuranceHistory.equals(0)) {
             factor = 1.2;
-        } else if (insuranceHistory < 2) {
+        } else if (insuranceHistory <= 2) {
             factor = 1.1;
         } else if (insuranceHistory > 2) {
             factor = 1.0;
@@ -209,6 +206,9 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
                 if (vehicleInsurance.getName() != null) {
                     existingVehicleInsurance.setName(vehicleInsurance.getName());
                 }
+                if (vehicleInsurance.getBirthdate() != null) {
+                    existingVehicleInsurance.setBirthdate(vehicleInsurance.getBirthdate());
+                }
                 if (vehicleInsurance.getAge() != null) {
                     existingVehicleInsurance.setAge(vehicleInsurance.getAge());
                 }
@@ -220,6 +220,18 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
                 }
                 if (vehicleInsurance.getClaims() != null) {
                     existingVehicleInsurance.setClaims(vehicleInsurance.getClaims());
+                }
+                if (vehicleInsurance.getCategory() != null) {
+                    existingVehicleInsurance.setCategory(vehicleInsurance.getCategory());
+                }
+                if (vehicleInsurance.getMake() != null) {
+                    existingVehicleInsurance.setMake(vehicleInsurance.getMake());
+                }
+                if (vehicleInsurance.getModel() != null) {
+                    existingVehicleInsurance.setModel(vehicleInsurance.getModel());
+                }
+                if (vehicleInsurance.getYear() != null) {
+                    existingVehicleInsurance.setYear(vehicleInsurance.getYear());
                 }
                 if (vehicleInsurance.getCar_value() != null) {
                     existingVehicleInsurance.setCar_value(vehicleInsurance.getCar_value());

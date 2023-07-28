@@ -9,6 +9,11 @@
       "fieldValidateRules": ["required", "unique"]
     },
     {
+      "fieldName": "birthdate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "age",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
@@ -27,6 +32,22 @@
       "fieldName": "claims",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "make",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
     },
     {
       "fieldName": "car_value",

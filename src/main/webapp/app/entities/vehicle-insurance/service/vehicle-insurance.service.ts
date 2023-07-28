@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { BasePremium, CarModel, IVehicleInsurance, NewVehicleInsurance } from '../vehicle-insurance.model';
 import { VehicleInsuranceConfigService } from 'app/core/config/vehicle-insurance-config.service';
+import { DATE_FORMAT } from 'app/config/input.constants';
+import dayjs from 'dayjs';
 
 export type PartialUpdateVehicleInsurance = Partial<IVehicleInsurance> & Pick<IVehicleInsurance, 'id'>;
+
+type RestOf<T extends IVehicleInsurance | NewVehicleInsurance> = Omit<T, 'birthdate'> & {
+  birthdate?: string | null;
+};
+
+export type RestVehicleInsurance = RestOf<IVehicleInsurance>;
+
+export type NewRestVehicleInsurance = RestOf<NewVehicleInsurance>;
+
+export type PartialUpdateRestVehicleInsurance = RestOf<PartialUpdateVehicleInsurance>;
 
 export type EntityResponseType = HttpResponse<IVehicleInsurance>;
 export type EntityArrayResponseType = HttpResponse<IVehicleInsurance[]>;
@@ -33,23 +45,28 @@ export class VehicleInsuranceService {
   }
 
   create(vehicleInsurance: NewVehicleInsurance): Observable<EntityResponseType> {
-    return this.http.post<IVehicleInsurance>(this.resourceUrl, vehicleInsurance, { observe: 'response' });
+    const copy = this.convertDateFromClient(vehicleInsurance);
+    return this.http
+      .post<RestVehicleInsurance>(this.resourceUrl, copy, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   update(vehicleInsurance: IVehicleInsurance): Observable<EntityResponseType> {
-    return this.http.put<IVehicleInsurance>(
-      `${this.resourceUrl}/${this.getVehicleInsuranceIdentifier(vehicleInsurance)}`,
-      vehicleInsurance,
-      { observe: 'response' }
-    );
+    const copy = this.convertDateFromClient(vehicleInsurance);
+    return this.http
+      .put<RestVehicleInsurance>(`${this.resourceUrl}/${this.getVehicleInsuranceIdentifier(vehicleInsurance)}`, copy, {
+        observe: 'response',
+      })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(vehicleInsurance: PartialUpdateVehicleInsurance): Observable<EntityResponseType> {
-    return this.http.patch<IVehicleInsurance>(
-      `${this.resourceUrl}/${this.getVehicleInsuranceIdentifier(vehicleInsurance)}`,
-      vehicleInsurance,
-      { observe: 'response' }
-    );
+    const copy = this.convertDateFromClient(vehicleInsurance);
+    return this.http
+      .patch<RestVehicleInsurance>(`${this.resourceUrl}/${this.getVehicleInsuranceIdentifier(vehicleInsurance)}`, copy, {
+        observe: 'response',
+      })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   calculate(id: number): Observable<EntityResponseType> {
@@ -57,12 +74,16 @@ export class VehicleInsuranceService {
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IVehicleInsurance>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http
+      .get<RestVehicleInsurance>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IVehicleInsurance[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http
+      .get<RestVehicleInsurance[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -97,5 +118,33 @@ export class VehicleInsuranceService {
       return [...vehicleInsurancesToAdd, ...vehicleInsuranceCollection];
     }
     return vehicleInsuranceCollection;
+  }
+
+  protected convertDateFromClient<T extends IVehicleInsurance | NewVehicleInsurance | PartialUpdateVehicleInsurance>(
+    vehicleInsurance: T
+  ): RestOf<T> {
+    return {
+      ...vehicleInsurance,
+      birthdate: dayjs(vehicleInsurance.birthdate).format(DATE_FORMAT) ?? null,
+    };
+  }
+
+  protected convertDateFromServer(restVehicleInsurance: RestVehicleInsurance): IVehicleInsurance {
+    return {
+      ...restVehicleInsurance,
+      birthdate: restVehicleInsurance.birthdate ? dayjs(restVehicleInsurance.birthdate) : undefined,
+    };
+  }
+
+  protected convertResponseFromServer(res: HttpResponse<RestVehicleInsurance>): HttpResponse<IVehicleInsurance> {
+    return res.clone({
+      body: res.body ? this.convertDateFromServer(res.body) : null,
+    });
+  }
+
+  protected convertResponseArrayFromServer(res: HttpResponse<RestVehicleInsurance[]>): HttpResponse<IVehicleInsurance[]> {
+    return res.clone({
+      body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
+    });
   }
 }

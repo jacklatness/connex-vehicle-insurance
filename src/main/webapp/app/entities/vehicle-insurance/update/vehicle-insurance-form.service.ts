@@ -19,10 +19,15 @@ type VehicleInsuranceFormDefaults = Pick<NewVehicleInsurance, 'id'>;
 type VehicleInsuranceFormGroupContent = {
   id: FormControl<IVehicleInsurance['id'] | NewVehicleInsurance['id']>;
   name: FormControl<IVehicleInsurance['name']>;
+  birthdate: FormControl<IVehicleInsurance['birthdate']>;
   age: FormControl<IVehicleInsurance['age']>;
   driving_experience: FormControl<IVehicleInsurance['driving_experience']>;
   driver_record: FormControl<IVehicleInsurance['driver_record']>;
   claims: FormControl<IVehicleInsurance['claims']>;
+  category: FormControl<IVehicleInsurance['category']>;
+  make: FormControl<IVehicleInsurance['make']>;
+  model: FormControl<IVehicleInsurance['model']>;
+  year: FormControl<IVehicleInsurance['year']>;
   car_value: FormControl<IVehicleInsurance['car_value']>;
   annual_mileage: FormControl<IVehicleInsurance['annual_mileage']>;
   insurance_history: FormControl<IVehicleInsurance['insurance_history']>;
@@ -48,6 +53,9 @@ export class VehicleInsuranceFormService {
       name: new FormControl(vehicleInsuranceRawValue.name, {
         validators: [Validators.required],
       }),
+      birthdate: new FormControl(vehicleInsuranceRawValue.birthdate, {
+        validators: [Validators.required],
+      }),
       age: new FormControl(vehicleInsuranceRawValue.age, {
         validators: [Validators.required],
       }),
@@ -60,6 +68,10 @@ export class VehicleInsuranceFormService {
       claims: new FormControl(vehicleInsuranceRawValue.claims, {
         validators: [Validators.required],
       }),
+      category: new FormControl(vehicleInsuranceRawValue.category),
+      make: new FormControl(vehicleInsuranceRawValue.make),
+      model: new FormControl(vehicleInsuranceRawValue.model),
+      year: new FormControl(vehicleInsuranceRawValue.year),
       car_value: new FormControl(vehicleInsuranceRawValue.car_value, {
         validators: [Validators.required],
       }),

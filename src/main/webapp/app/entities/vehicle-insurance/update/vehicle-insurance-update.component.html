@@ -27,23 +27,39 @@
           </div>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.age" for="field_age">Age</label>
-          <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" />
-          <div *ngIf="editForm.get('age')!.invalid && (editForm.get('age')!.dirty || editForm.get('age')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('age')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-            <small class="form-text text-danger" [hidden]="!editForm.get('age')?.errors?.number" jhiTranslate="entity.validation.number">
-              This field should be a number.
-            </small>
+        <div class="row mb-3">
+          <div class="col-6">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.birthdate" for="field_birthdate">Birthdate</label>
+            <input
+              type="date"
+              class="form-control"
+              name="birthdate"
+              id="field_birthdate"
+              data-cy="birthdate"
+              formControlName="birthdate"
+              (change)="calculateAge()"
+            />
+            <div *ngIf="editForm.get('birthdate')!.invalid && (editForm.get('birthdate')!.dirty || editForm.get('birthdate')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('birthdate')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.age" for="field_age">Age</label>
+            <input type="number" class="form-control" name="age" id="field_age" data-cy="age" formControlName="age" readonly />
           </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driving_experience" for="field_driving_experience"
-            >Driving Experience</label
-          >
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driving_experience" for="field_driving_experience">
+            Years of Driving Experience
+            <fa-icon icon="circle-question" ngbTooltip="Input the number of years of your driving experience."></fa-icon>
+          </label>
           <input
             type="number"
             class="form-control"
@@ -76,7 +92,13 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driver_record" for="field_driver_record">Driver Record</label>
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.driver_record" for="field_driver_record">
+            Driver's record in last 5 years
+            <fa-icon
+              icon="circle-question"
+              ngbTooltip="Input the number of times of at fault traffic violations or accidents in last 5 years."
+            ></fa-icon>
+          </label>
           <input
             type="number"
             class="form-control"
@@ -108,7 +130,9 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.claims" for="field_claims">Claims</label>
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.claims" for="field_claims">
+            Claims <fa-icon icon="circle-question" ngbTooltip="Input the number of insurance claims."></fa-icon>
+          </label>
           <input type="number" class="form-control" name="claims" id="field_claims" data-cy="claims" formControlName="claims" />
           <div *ngIf="editForm.get('claims')!.invalid && (editForm.get('claims')!.dirty || editForm.get('claims')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('claims')?.errors?.required" jhiTranslate="entity.validation.required">
@@ -120,8 +144,52 @@
           </div>
         </div>
 
+        <div class="row mb-3">
+          <div class="col-3">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.category" for="field_category">Car Category</label>
+            <select
+              class="form-select"
+              name="category"
+              id="field_category"
+              data-cy="category"
+              formControlName="category"
+              (change)="getMake()"
+            >
+              <option *ngFor="let category of carCategory" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.make" for="field_make">Make</label>
+            <select class="form-select" name="make" id="field_make" data-cy="make" formControlName="make" (change)="getModel()">
+              <option *ngFor="let make of carMake" [value]="make">
+                {{ make }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.model" for="field_model">Model</label>
+            <select class="form-select" name="model" id="field_model" data-cy="model" formControlName="model" (change)="getYear()">
+              <option *ngFor="let model of carModel" [value]="model">
+                {{ model }}
+              </option>
+            </select>
+          </div>
+          <div class="col-3">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.year" for="field_year">Year</label>
+            <select class="form-select" name="year" id="field_year" data-cy="year" formControlName="year">
+              <option *ngFor="let year of carYear" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_value" for="field_car_value">Car Value</label>
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_value" for="field_car_value">
+            Car Value <fa-icon icon="circle-question" ngbTooltip="Input your vehicle's current value."></fa-icon>
+          </label>
           <input type="number" class="form-control" name="car_value" id="field_car_value" data-cy="car_value" formControlName="car_value" />
           <div *ngIf="editForm.get('car_value')!.invalid && (editForm.get('car_value')!.dirty || editForm.get('car_value')!.touched)">
             <small
@@ -142,9 +210,9 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.annual_mileage" for="field_annual_mileage"
-            >Annual Mileage</label
-          >
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.annual_mileage" for="field_annual_mileage">
+            Annual Mileage <fa-icon icon="circle-question" ngbTooltip="Input your annual driving distance."></fa-icon>
+          </label>
           <input
             type="number"
             class="form-control"
@@ -176,9 +244,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.insurance_history" for="field_insurance_history"
-            >Insurance History</label
-          >
+          <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.insurance_history" for="field_insurance_history">
+            Insurance History
+            <fa-icon icon="circle-question" ngbTooltip="Input the number of times you acquired a car insurance."></fa-icon>
+          </label>
           <input
             type="number"
             class="form-control"

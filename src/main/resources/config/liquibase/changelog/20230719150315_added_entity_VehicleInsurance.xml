@@ -17,6 +17,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="ux_vehicle_insurance__name" />
             </column>
+            <column name="birthdate" type="date">
+                <constraints nullable="false" />
+            </column>
             <column name="age" type="integer">
                 <constraints nullable="false" />
             </column>
@@ -28,6 +31,18 @@
             </column>
             <column name="claims" type="integer">
                 <constraints nullable="false" />
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="make" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="model" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="year" type="integer">
+                <constraints nullable="true" />
             </column>
             <column name="car_value" type="decimal(21,2)">
                 <constraints nullable="false" />
@@ -60,10 +75,15 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="birthdate" type="date"/>
             <column name="age" type="numeric"/>
             <column name="driving_experience" type="numeric"/>
             <column name="driver_record" type="numeric"/>
             <column name="claims" type="numeric"/>
+            <column name="category" type="string"/>
+            <column name="make" type="string"/>
+            <column name="model" type="string"/>
+            <column name="year" type="numeric"/>
             <column name="car_value" type="numeric"/>
             <column name="annual_mileage" type="numeric"/>
             <column name="insurance_history" type="numeric"/>
