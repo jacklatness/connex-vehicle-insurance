@@ -48,17 +48,17 @@ public class VehicleInsurance implements Serializable {
     @Column(name = "claims", nullable = false)
     private Integer claims;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "car_category")
+    private String car_category;
 
-    @Column(name = "make")
-    private String make;
+    @Column(name = "car_make")
+    private String car_make;
 
-    @Column(name = "model")
-    private String model;
+    @Column(name = "car_model")
+    private String car_model;
 
-    @Column(name = "year")
-    private Integer year;
+    @Column(name = "car_year")
+    private Integer car_year;
 
     @NotNull
     @Column(name = "car_value", precision = 21, scale = 2, nullable = false)
@@ -165,56 +165,56 @@ public class VehicleInsurance implements Serializable {
         this.claims = claims;
     }
 
-    public String getCategory() {
-        return this.category;
+    public String getCar_category() {
+        return this.car_category;
     }
 
-    public VehicleInsurance category(String category) {
-        this.setCategory(category);
+    public VehicleInsurance car_category(String car_category) {
+        this.setCar_category(car_category);
         return this;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCar_category(String car_category) {
+        this.car_category = car_category;
     }
 
-    public String getMake() {
-        return this.make;
+    public String getCar_make() {
+        return this.car_make;
     }
 
-    public VehicleInsurance make(String make) {
-        this.setMake(make);
+    public VehicleInsurance car_make(String car_make) {
+        this.setCar_make(car_make);
         return this;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public void setCar_make(String car_make) {
+        this.car_make = car_make;
     }
 
-    public String getModel() {
-        return this.model;
+    public String getCar_model() {
+        return this.car_model;
     }
 
-    public VehicleInsurance model(String model) {
-        this.setModel(model);
+    public VehicleInsurance car_model(String car_model) {
+        this.setCar_model(car_model);
         return this;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setCar_model(String car_model) {
+        this.car_model = car_model;
     }
 
-    public Integer getYear() {
-        return this.year;
+    public Integer getCar_year() {
+        return this.car_year;
     }
 
-    public VehicleInsurance year(Integer year) {
-        this.setYear(year);
+    public VehicleInsurance car_year(Integer car_year) {
+        this.setCar_year(car_year);
         return this;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setCar_year(Integer car_year) {
+        this.car_year = car_year;
     }
 
     public BigDecimal getCar_value() {
@@ -286,10 +286,10 @@ public class VehicleInsurance implements Serializable {
             ", driving_experience=" + getDriving_experience() +
             ", driver_record=" + getDriver_record() +
             ", claims=" + getClaims() +
-            ", category='" + getCategory() + "'" +
-            ", make='" + getMake() + "'" +
-            ", model='" + getModel() + "'" +
-            ", year=" + getYear() +
+            ", car_category='" + getCar_category() + "'" +
+            ", car_make='" + getCar_make() + "'" +
+            ", car_model='" + getCar_model() + "'" +
+            ", car_year=" + getCar_year() +
             ", car_value=" + getCar_value() +
             ", annual_mileage=" + getAnnual_mileage() +
             ", insurance_history=" + getInsurance_history() +

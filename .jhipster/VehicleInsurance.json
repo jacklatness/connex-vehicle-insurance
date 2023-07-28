@@ -34,19 +34,19 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "category",
+      "fieldName": "car_category",
       "fieldType": "String"
     },
     {
-      "fieldName": "make",
+      "fieldName": "car_make",
       "fieldType": "String"
     },
     {
-      "fieldName": "model",
+      "fieldName": "car_model",
       "fieldType": "String"
     },
     {
-      "fieldName": "year",
+      "fieldName": "car_year",
       "fieldType": "Integer"
     },
     {

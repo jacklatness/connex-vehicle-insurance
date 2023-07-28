@@ -1,11 +1,11 @@
-id;name;birthdate;age;driving_experience;driver_record;claims;category;make;model;year;car_value;annual_mileage;insurance_history
-1;bus off;2023-07-18;15294;125;10876;24318;Factors indigo;male Refined sadly;Cargo;31020;31773;681;17932
-2;Palladium Account Communications;2023-07-19;26880;12609;16747;15966;bandwidth;overriding Van Car;Bicycle Computer Porsche;6383;17907;10117;10246
-3;deposit;2023-07-19;8518;9094;25290;11160;Medhurst Architect 1080p;flexibility white Uzbekistan;circuit Liaison Networked;7575;30219;17325;8760
-4;Southeast although;2023-07-19;5844;23112;11424;757;Connecticut;bluetooth;Home Hybrid;2780;23007;12829;3778
-5;Bicycle Congolese;2023-07-19;21873;6740;23941;4844;deposit;Toys;Grocery Tennessee;19762;13217;23113;24588
-6;North;2023-07-18;12460;28806;2668;25606;Jewelery;quantifying Northwest lever;portals deposit Ameliorated;28637;24896;22738;12415
-7;Directives World Diesel;2023-07-19;21905;2326;2002;11461;Murray South;Dollar silver yearly;lavender Small;29473;20445;22292;21863
-8;Car excepting vaguely;2023-07-19;22397;1916;10930;21626;female;blockchains;Radon Southwest matrix;13264;11019;30455;3670
-9;ROI Electric;2023-07-19;25998;5180;20338;11622;Small;Southwest entire Pound;Crew;29744;1441;27317;13412
-10;Paradigm;2023-07-18;21075;31671;13674;10659;Bike Yemeni Cloned;Norwegian Other;female Response;14197;26097;25554;21235
+id;name;birthdate;age;driving_experience;driver_record;claims;car_category;car_make;car_model;car_year;car_value;annual_mileage;insurance_history
+1;Xuan Wen;2023-07-18;45;14;2;1;SUV;Audi;Q3;2020;31773;681;1
+2;Cale China;2023-07-19;17;1;0;0;Sedan;Cadillac;CT6-V;2020;17907;10117;2
+3;Mayson Jojo;2023-07-19;45;4;0;3;Hatchback;Hyundai;Elantra GT;2020;30219;17325;3
+4;Madelyn Aubrey;2023-07-19;34;7;1;1;Coupe;Lexus;LX;2020;23007;12829;2
+5;Buzz Jakki;2023-07-19;56;30;3;3;Sedan;Lincoln;MKZ;2020;13217;23113;3
+6;Tylor Oswin;2023-07-18;28;8;1;0;SUV;Subaru;Forester;2003;22738;10233;1
+7;Ariel Alita;2023-07-19;36;10;1;1;Hatchback;Suzuki;Swift;1997;20445;22292;1
+8;Aubrielle Eglantine;2023-07-19;22;5;5;5;Hatchback;Toyota;Supra;1997;11019;30455;1
+9;Sibyl Linsay;2023-07-19;45;15;1;1;Pickup;Dodge;Ram 50 Regular Cab;1993;1441;27317;1
+10;Brett Dolly;2023-07-18;39;10;2;2;Hatchback;Volkswagen;Golf;1992;26097;25554;1

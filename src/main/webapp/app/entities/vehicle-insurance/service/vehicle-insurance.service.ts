@@ -132,7 +132,6 @@ export class VehicleInsuranceService {
   protected convertDateFromServer(restVehicleInsurance: RestVehicleInsurance): IVehicleInsurance {
     return {
       ...restVehicleInsurance,
-      birthdate: restVehicleInsurance.birthdate ? dayjs(restVehicleInsurance.birthdate) : undefined,
     };
   }
 

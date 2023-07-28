@@ -146,14 +146,14 @@
 
         <div class="row mb-3">
           <div class="col-3">
-            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.category" for="field_category">Car Category</label>
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_category" for="field_car_category">Car</label>
             <select
               class="form-select"
-              name="category"
-              id="field_category"
-              data-cy="category"
-              formControlName="category"
-              (change)="getMake()"
+              name="car_category"
+              id="field_car_category"
+              data-cy="car_category"
+              formControlName="car_category"
+              (change)="getMake(true)"
             >
               <option *ngFor="let category of carCategory" [value]="category">
                 {{ category }}
@@ -161,24 +161,38 @@
             </select>
           </div>
           <div class="col-3">
-            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.make" for="field_make">Make</label>
-            <select class="form-select" name="make" id="field_make" data-cy="make" formControlName="make" (change)="getModel()">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_make" for="field_car_make">Make</label>
+            <select
+              class="form-select"
+              name="car_make"
+              id="field_car_make"
+              data-cy="car_make"
+              formControlName="car_make"
+              (change)="getModel(true)"
+            >
               <option *ngFor="let make of carMake" [value]="make">
                 {{ make }}
               </option>
             </select>
           </div>
           <div class="col-3">
-            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.model" for="field_model">Model</label>
-            <select class="form-select" name="model" id="field_model" data-cy="model" formControlName="model" (change)="getYear()">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_model" for="field_car_model">Model</label>
+            <select
+              class="form-select"
+              name="car_model"
+              id="field_car_model"
+              data-cy="car_model"
+              formControlName="car_model"
+              (change)="getYear(true)"
+            >
               <option *ngFor="let model of carModel" [value]="model">
                 {{ model }}
               </option>
             </select>
           </div>
           <div class="col-3">
-            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.year" for="field_year">Year</label>
-            <select class="form-select" name="year" id="field_year" data-cy="year" formControlName="year">
+            <label class="form-label" jhiTranslate="connexApp.vehicleInsurance.car_year" for="field_car_year">Year</label>
+            <select class="form-select" name="car_year" id="field_car_year" data-cy="car_year" formControlName="car_year">
               <option *ngFor="let year of carYear" [value]="year">
                 {{ year }}
               </option>

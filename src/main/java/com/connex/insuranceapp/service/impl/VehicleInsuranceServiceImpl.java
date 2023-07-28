@@ -221,17 +221,17 @@ public class VehicleInsuranceServiceImpl implements VehicleInsuranceService {
                 if (vehicleInsurance.getClaims() != null) {
                     existingVehicleInsurance.setClaims(vehicleInsurance.getClaims());
                 }
-                if (vehicleInsurance.getCategory() != null) {
-                    existingVehicleInsurance.setCategory(vehicleInsurance.getCategory());
+                if (vehicleInsurance.getCar_category() != null) {
+                    existingVehicleInsurance.setCar_category(vehicleInsurance.getCar_category());
                 }
-                if (vehicleInsurance.getMake() != null) {
-                    existingVehicleInsurance.setMake(vehicleInsurance.getMake());
+                if (vehicleInsurance.getCar_make() != null) {
+                    existingVehicleInsurance.setCar_make(vehicleInsurance.getCar_make());
                 }
-                if (vehicleInsurance.getModel() != null) {
-                    existingVehicleInsurance.setModel(vehicleInsurance.getModel());
+                if (vehicleInsurance.getCar_model() != null) {
+                    existingVehicleInsurance.setCar_model(vehicleInsurance.getCar_model());
                 }
-                if (vehicleInsurance.getYear() != null) {
-                    existingVehicleInsurance.setYear(vehicleInsurance.getYear());
+                if (vehicleInsurance.getCar_year() != null) {
+                    existingVehicleInsurance.setCar_year(vehicleInsurance.getCar_year());
                 }
                 if (vehicleInsurance.getCar_value() != null) {
                     existingVehicleInsurance.setCar_value(vehicleInsurance.getCar_value());

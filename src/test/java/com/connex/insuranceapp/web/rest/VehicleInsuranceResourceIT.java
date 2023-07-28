@@ -103,10 +103,10 @@ class VehicleInsuranceResourceIT {
             .driving_experience(DEFAULT_DRIVING_EXPERIENCE)
             .driver_record(DEFAULT_DRIVER_RECORD)
             .claims(DEFAULT_CLAIMS)
-            .category(DEFAULT_CATEGORY)
-            .make(DEFAULT_MAKE)
-            .model(DEFAULT_MODEL)
-            .year(DEFAULT_YEAR)
+            .car_categorycategory(DEFAULT_CATEGORY)
+            .car_make(DEFAULT_MAKE)
+            .car_modelmodel(DEFAULT_MODEL)
+            .car_year(DEFAULT_YEAR)
             .car_value(DEFAULT_CAR_VALUE)
             .annual_mileage(DEFAULT_ANNUAL_MILEAGE)
             .insurance_history(DEFAULT_INSURANCE_HISTORY);
@@ -127,10 +127,10 @@ class VehicleInsuranceResourceIT {
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
-            .category(UPDATED_CATEGORY)
-            .make(UPDATED_MAKE)
-            .model(UPDATED_MODEL)
-            .year(UPDATED_YEAR)
+            .car_category(UPDATED_CATEGORY)
+            .car_make(UPDATED_MAKE)
+            .car_model(UPDATED_MODEL)
+            .car_year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -163,10 +163,10 @@ class VehicleInsuranceResourceIT {
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(DEFAULT_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(DEFAULT_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(DEFAULT_CLAIMS);
-        assertThat(testVehicleInsurance.getCategory()).isEqualTo(DEFAULT_CATEGORY);
-        assertThat(testVehicleInsurance.getMake()).isEqualTo(DEFAULT_MAKE);
-        assertThat(testVehicleInsurance.getModel()).isEqualTo(DEFAULT_MODEL);
-        assertThat(testVehicleInsurance.getYear()).isEqualTo(DEFAULT_YEAR);
+        assertThat(testVehicleInsurance.getCar_category()).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(testVehicleInsurance.getCar_make()).isEqualTo(DEFAULT_MAKE);
+        assertThat(testVehicleInsurance.getCar_model()).isEqualTo(DEFAULT_MODEL);
+        assertThat(testVehicleInsurance.getCar_year()).isEqualTo(DEFAULT_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(DEFAULT_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(DEFAULT_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(DEFAULT_INSURANCE_HISTORY);
@@ -381,10 +381,10 @@ class VehicleInsuranceResourceIT {
             .andExpect(jsonPath("$.[*].driving_experience").value(hasItem(DEFAULT_DRIVING_EXPERIENCE)))
             .andExpect(jsonPath("$.[*].driver_record").value(hasItem(DEFAULT_DRIVER_RECORD)))
             .andExpect(jsonPath("$.[*].claims").value(hasItem(DEFAULT_CLAIMS)))
-            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY)))
-            .andExpect(jsonPath("$.[*].make").value(hasItem(DEFAULT_MAKE)))
-            .andExpect(jsonPath("$.[*].model").value(hasItem(DEFAULT_MODEL)))
-            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
+            .andExpect(jsonPath("$.[*].car_category").value(hasItem(DEFAULT_CATEGORY)))
+            .andExpect(jsonPath("$.[*].car_make").value(hasItem(DEFAULT_MAKE)))
+            .andExpect(jsonPath("$.[*].car_model").value(hasItem(DEFAULT_MODEL)))
+            .andExpect(jsonPath("$.[*].car_year").value(hasItem(DEFAULT_YEAR)))
             .andExpect(jsonPath("$.[*].car_value").value(hasItem(sameNumber(DEFAULT_CAR_VALUE))))
             .andExpect(jsonPath("$.[*].annual_mileage").value(hasItem(sameNumber(DEFAULT_ANNUAL_MILEAGE))))
             .andExpect(jsonPath("$.[*].insurance_history").value(hasItem(DEFAULT_INSURANCE_HISTORY)));
@@ -408,10 +408,10 @@ class VehicleInsuranceResourceIT {
             .andExpect(jsonPath("$.driving_experience").value(DEFAULT_DRIVING_EXPERIENCE))
             .andExpect(jsonPath("$.driver_record").value(DEFAULT_DRIVER_RECORD))
             .andExpect(jsonPath("$.claims").value(DEFAULT_CLAIMS))
-            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY))
-            .andExpect(jsonPath("$.make").value(DEFAULT_MAKE))
-            .andExpect(jsonPath("$.model").value(DEFAULT_MODEL))
-            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
+            .andExpect(jsonPath("$.car_category").value(DEFAULT_CATEGORY))
+            .andExpect(jsonPath("$.car_make").value(DEFAULT_MAKE))
+            .andExpect(jsonPath("$.car_model").value(DEFAULT_MODEL))
+            .andExpect(jsonPath("$.car_year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.car_value").value(sameNumber(DEFAULT_CAR_VALUE)))
             .andExpect(jsonPath("$.annual_mileage").value(sameNumber(DEFAULT_ANNUAL_MILEAGE)))
             .andExpect(jsonPath("$.insurance_history").value(DEFAULT_INSURANCE_HISTORY));
@@ -443,10 +443,10 @@ class VehicleInsuranceResourceIT {
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
-            .category(UPDATED_CATEGORY)
-            .make(UPDATED_MAKE)
-            .model(UPDATED_MODEL)
-            .year(UPDATED_YEAR)
+            .car_category(UPDATED_CATEGORY)
+            .car_make(UPDATED_MAKE)
+            .car_model(UPDATED_MODEL)
+            .car_year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -469,10 +469,10 @@ class VehicleInsuranceResourceIT {
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(UPDATED_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(UPDATED_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
-        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
-        assertThat(testVehicleInsurance.getMake()).isEqualTo(UPDATED_MAKE);
-        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
-        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVehicleInsurance.getCar_category()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getCar_make()).isEqualTo(UPDATED_MAKE);
+        assertThat(testVehicleInsurance.getCar_model()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getCar_year()).isEqualTo(UPDATED_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(UPDATED_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(UPDATED_INSURANCE_HISTORY);
@@ -552,9 +552,9 @@ class VehicleInsuranceResourceIT {
             .birthdate(UPDATED_BIRTHDATE)
             .age(UPDATED_AGE)
             .claims(UPDATED_CLAIMS)
-            .category(UPDATED_CATEGORY)
-            .model(UPDATED_MODEL)
-            .year(UPDATED_YEAR)
+            .car_category(UPDATED_CATEGORY)
+            .car_model(UPDATED_MODEL)
+            .car_year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE);
 
         restVehicleInsuranceMockMvc
@@ -575,10 +575,10 @@ class VehicleInsuranceResourceIT {
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(DEFAULT_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(DEFAULT_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
-        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
-        assertThat(testVehicleInsurance.getMake()).isEqualTo(DEFAULT_MAKE);
-        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
-        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVehicleInsurance.getCar_category()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getCar_make()).isEqualTo(DEFAULT_MAKE);
+        assertThat(testVehicleInsurance.getCar_model()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getCar_year()).isEqualTo(UPDATED_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(DEFAULT_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(DEFAULT_INSURANCE_HISTORY);
@@ -603,10 +603,10 @@ class VehicleInsuranceResourceIT {
             .driving_experience(UPDATED_DRIVING_EXPERIENCE)
             .driver_record(UPDATED_DRIVER_RECORD)
             .claims(UPDATED_CLAIMS)
-            .category(UPDATED_CATEGORY)
-            .make(UPDATED_MAKE)
-            .model(UPDATED_MODEL)
-            .year(UPDATED_YEAR)
+            .car_category(UPDATED_CATEGORY)
+            .car_make(UPDATED_MAKE)
+            .car_model(UPDATED_MODEL)
+            .car_year(UPDATED_YEAR)
             .car_value(UPDATED_CAR_VALUE)
             .annual_mileage(UPDATED_ANNUAL_MILEAGE)
             .insurance_history(UPDATED_INSURANCE_HISTORY);
@@ -629,10 +629,10 @@ class VehicleInsuranceResourceIT {
         assertThat(testVehicleInsurance.getDriving_experience()).isEqualTo(UPDATED_DRIVING_EXPERIENCE);
         assertThat(testVehicleInsurance.getDriver_record()).isEqualTo(UPDATED_DRIVER_RECORD);
         assertThat(testVehicleInsurance.getClaims()).isEqualTo(UPDATED_CLAIMS);
-        assertThat(testVehicleInsurance.getCategory()).isEqualTo(UPDATED_CATEGORY);
-        assertThat(testVehicleInsurance.getMake()).isEqualTo(UPDATED_MAKE);
-        assertThat(testVehicleInsurance.getModel()).isEqualTo(UPDATED_MODEL);
-        assertThat(testVehicleInsurance.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVehicleInsurance.getCar_category()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testVehicleInsurance.getCar_make()).isEqualTo(UPDATED_MAKE);
+        assertThat(testVehicleInsurance.getCar_model()).isEqualTo(UPDATED_MODEL);
+        assertThat(testVehicleInsurance.getCar_year()).isEqualTo(UPDATED_YEAR);
         assertThat(testVehicleInsurance.getCar_value()).isEqualByComparingTo(UPDATED_CAR_VALUE);
         assertThat(testVehicleInsurance.getAnnual_mileage()).isEqualByComparingTo(UPDATED_ANNUAL_MILEAGE);
         assertThat(testVehicleInsurance.getInsurance_history()).isEqualTo(UPDATED_INSURANCE_HISTORY);

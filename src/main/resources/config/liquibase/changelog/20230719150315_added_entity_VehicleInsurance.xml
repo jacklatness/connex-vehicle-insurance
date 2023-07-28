@@ -32,16 +32,16 @@
             <column name="claims" type="integer">
                 <constraints nullable="false" />
             </column>
-            <column name="category" type="varchar(255)">
+            <column name="car_category" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="make" type="varchar(255)">
+            <column name="car_make" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="model" type="varchar(255)">
+            <column name="car_model" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="year" type="integer">
+            <column name="car_year" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="car_value" type="decimal(21,2)">
@@ -80,10 +80,10 @@
             <column name="driving_experience" type="numeric"/>
             <column name="driver_record" type="numeric"/>
             <column name="claims" type="numeric"/>
-            <column name="category" type="string"/>
-            <column name="make" type="string"/>
-            <column name="model" type="string"/>
-            <column name="year" type="numeric"/>
+            <column name="car_category" type="string"/>
+            <column name="car_make" type="string"/>
+            <column name="car_model" type="string"/>
+            <column name="car_year" type="numeric"/>
             <column name="car_value" type="numeric"/>
             <column name="annual_mileage" type="numeric"/>
             <column name="insurance_history" type="numeric"/>
